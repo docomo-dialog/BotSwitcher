@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="xaiml1.1.0" xmlns="http://www.nttdocomo.com/aiml/schema" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.nttdocomo.com/aiml/schema/AIML.xsd">
+
+  <!-- 受け取ったボットIDを現在のボットIDにセットする -->
+	<category recursion="true">
+		<pattern level="regex">^#set ([^\s]*)$</pattern>
+		<pattern level="regex">^#Set ([^\s]*)$</pattern>
+		<pattern level="regex">^#SET ([^\s]*)$</pattern>
+		<template>
+			<think><set name="start"><date/></set></think>
+			<predstore>current=<star/></predstore>
+		</template>
+	</category>
+
+  <!-- 現在のボットIDを消去する -->
+	<category recursion="true">
+		<pattern level="regex">^#clear$</pattern>
+		<pattern level="regex">^#Clear$</pattern>
+		<pattern level="regex">^#CLEAR$</pattern>
+		<template>
+			<think>
+				<predstore>!current</predstore>
+				<set name="start"/>
+			</think>
+			OK
+		</template>
+	</category>
+
+  <!-- 現在のボットIDを渡す -->
+	<category recursion="true">
+		<pattern level="regex">^#get$</pattern>
+		<pattern level="regex">^#Get$</pattern>
+		<pattern level="regex">^#GET$</pattern>
+		<template>
+			<think><set name="_var_current"><predstore>current</predstore></set></think>
+			<condition name="_var_current">
+				<li value="undefined">NOTFOUND</li>
+				<li>
+					<think><set name="_var_alive"><srai>#check expire</srai></set></think>
+					<condition name="_var_alive">
+						<li value="EXPIRED">
+							<think><srai>#CLEAR</srai></think>
+							EXPIRED
+						</li>
+						<li value="BOTNOTFOUND">NOTFOUND</li>
+						<li>
+							<predstore>current</predstore>
+							<think><set name="start"><date/></set></think>
+						</li>
+					</condition>
+				</li>
+			</condition>
+		</template>
+	</category>
+
+	<!-- 現在のボットIDの有効期限を判定する -->
+	<category recursion="true">
+		<pattern>#check expire</pattern>
+		<template>
+			<think>
+				<set name="_var_distance"><date_span field="second"><get name="start"/></date_span></set>
+				<set name="_var_time"><bot name="time"/></set>
+				<condition name="_var_time">
+					<li value="|undefined">
+						<set name="time">60</set>
+					</li>
+					<li>
+						<set name="time"><get name="_var_time"/></set>
+					</li>
+				</condition>
+			</think>
+			<condition name="_var_distance">
+				<li><value>GREATER_THAN <get name="time"/></value>EXPIRED</li>
+				<li value="undefined">BOTNOTFOUND</li>
+				<li>STILL ALIVE</li>
+			</condition>
+		</template>
+	</category>
+
+</aiml>
