@@ -32,3 +32,9 @@ BotSwitcherdではボットIDを保持する時間に有効期限を設けてい
 ```
 登録されているボットIDを破棄します。
 
+## 利用手順
+1. ボットID「BotSwitcher」でボットを作成  
+   "公開"はglobalもしくはpublicに設定
+2. BotSwitcherボットにBotSwitcher.aimlを追加しデプロイ
+3. 他のボットからsraixタグでBotSwitcherボットを呼び出す
+
