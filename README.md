@@ -30,8 +30,8 @@ BotSwitcherdではボットIDを保持する時間に有効期限を設けてい
 ```
 <sraix botid="(プロジェクト名)_BotSwitcher">#CLEAR</sraix>
 ```
-登録されているボットIDを破棄します。
-
+登録されているボットIDを破棄します。  
+<br/>
 ## 利用手順
 1. ボットID「BotSwitcher」でボットを作成  
    "公開"はglobalもしくはpublicに設定
