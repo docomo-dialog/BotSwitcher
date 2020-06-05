@@ -6,6 +6,13 @@ BotSwitcherdではボットIDを保持する時間に有効期限を設けてい
 有効期限はボットプロパティのキーに "time"、値に秒数を指定することで設定できます。  
 ボットプロパティで設定していない場合は60秒になります。  
 <br/>
+## 利用手順
+1. ボットID「BotSwitcher」でボットを作成  
+   ボット編集にて"公開"をglobalもしくはpublicに設定
+2. BotSwitcherボットにBotSwitcher.aimlを追加しデプロイ
+3. 他のボットからsraixタグでBotSwitcherボットを呼び出す  
+
+<br/>
 ## 関数詳細
 ### ボットID登録
 ###### 関数 : #SET botId
@@ -30,11 +37,5 @@ BotSwitcherdではボットIDを保持する時間に有効期限を設けてい
 ```
 <sraix botid="(プロジェクト名)_BotSwitcher">#CLEAR</sraix>
 ```
-登録されているボットIDを破棄します。  
-<br/>
-## 利用手順
-1. ボットID「BotSwitcher」でボットを作成  
-   "公開"はglobalもしくはpublicに設定
-2. BotSwitcherボットにBotSwitcher.aimlを追加しデプロイ
-3. 他のボットからsraixタグでBotSwitcherボットを呼び出す
+登録されているボットIDを破棄します。
 
