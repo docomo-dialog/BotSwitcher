@@ -12,6 +12,8 @@ BotSwitcherdではボットIDを保持する時間に有効期限を設けてい
 2. BotSwitcherボットにBotSwitcher.aimlを追加しデプロイ
 3. 他のボットからsraixタグでBotSwitcherボットを呼び出す  
 
+<br/>
+
 ## 関数詳細
 ### ボットID登録
 ###### 関数 : #SET botId
